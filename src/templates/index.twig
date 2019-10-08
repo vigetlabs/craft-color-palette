@@ -1,0 +1,59 @@
+{% extends '_layouts/cp' %}
+{% import '_includes/forms' as forms %}
+
+{% do view.registerAssetBundle("davist11\\colorpalette\\assetbundles\\indexcpsection\\IndexCPSectionAsset") %}
+
+{% set title = 'Color Palette' %}
+
+{% block actionButton %}
+    <a href="{{ url('color-palette/new') }}" class="btn submit add icon">
+        {{ 'New Color' | t('color-palette') }}
+    </a>
+{% endblock %}
+
+{% set colors = craft.colorPalette.getColors() %}
+
+{% block content %}
+    {% if colors | length %}
+        <table id="colors" class="data fullwidth">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Color</th>
+                    <th scope="col">
+                        <span class="hidden">Delete</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for color in colors %}
+                    <tr data-id="{{ color.id }}" data-name="{{ color.name }}">
+                        <th scope="row">
+                            <a href="{{ url('color-palette/' ~ color.id) }}">{{ color.name }}</a>
+                        </td>
+                        <td>
+                            <span class="color-sample" style="background-color: {{ color.hex }};"></span>
+                            <span class="color-name">{{ color.hex }}</span>
+                        </td>
+                        <td>
+                            <a class="delete icon" title="{{ 'Delete' | t('app') }}" role="button"></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+    <p id="no-colors" {% if colors | length %}class="hidden"{% endif %}>
+        No colors, add one!
+    </p>
+{% endblock %}
+
+{% js %}
+    new Craft.AdminTable({
+        tableSelector: '#colors',
+        noItemsSelector: '#no-colors',
+        deleteAction: 'color-palette/default/delete-color',
+        confirmDeleteMessage: '{{ "Are you sure you want to delete “{name}”?" | t('app') }}',
+    });
+{% endjs %}

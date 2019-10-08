@@ -1,0 +1,9 @@
+{% import "_includes/forms" as forms %}
+
+{{ forms.lightswitchField({
+    label: 'Allow multiple selections',
+    id: 'allowMultiple',
+    name: 'allowMultiple',
+    on: field['allowMultiple'],
+    value: true,
+}) }}

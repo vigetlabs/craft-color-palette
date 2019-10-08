@@ -1,0 +1,25 @@
+{% import "_includes/forms" as forms %}
+
+{% do view.registerAssetBundle("davist11\\colorpalette\\assetbundles\\colorpalettefield\\ColorPaletteFieldAsset") %}
+
+{% set inputType = field.allowMultiple ? 'checkbox' : 'radio' %}
+
+<div class="color-palette">
+    {% for color in colors %}
+        {% set inputId = [id, color.id] | join('-') %}
+
+        <div class="color-palette__color">
+            <label for="{{ inputId }}" class="color-palette__label">
+                <span class="color-palette__sample" style="background-color: {{ color.hex }};"></span>
+                {{ color.name }}
+            </label>
+            <input
+                type="{{ inputType }}"
+                name="{{ name }}[]"
+                id="{{ inputId }}"
+                value="{{ color.id }}"
+                {% if color.id in valueIds %}checked{% endif %}
+            >
+        </div>
+    {% endfor %}
+</div>

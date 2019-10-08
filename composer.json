@@ -1,0 +1,43 @@
+{
+    "name": "davist11/color-palette",
+    "description": "Create a color palette",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "color palette"
+    ],
+    "support": {
+        "docs": "???",
+        "issues": "???"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Trevor Davis",
+            "homepage": "https://www.trevor-davis.com"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0-RC1"
+    },
+    "autoload": {
+        "psr-4": {
+          "davist11\\colorpalette\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Color Palette",
+        "handle": "color-palette",
+        "hasCpSettings": false,
+        "hasCpSection": true,
+        "changelogUrl": "???",
+        "components": {
+            "colorPaletteService": "davist11\\colorpalette\\services\\ColorPaletteService"
+        },
+        "class": "davist11\\colorpalette\\ColorPalette"
+    }
+}
